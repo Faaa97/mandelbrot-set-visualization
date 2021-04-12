@@ -7,7 +7,7 @@
 
 ## Live demo
 
-You can enter the live demo ![here](https://faaa97.github.io/mandelbrot-set-visualization/)
+You can enter the live demo [here](https://faaa97.github.io/mandelbrot-set-visualization/)
 
 ## Directory Structure
 
