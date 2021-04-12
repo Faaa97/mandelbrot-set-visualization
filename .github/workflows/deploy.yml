@@ -23,6 +23,7 @@ jobs:
         cp ./README.md ./www/README.md
         cp ./LICENSE ./www/LICENSE
         cp -r ./src ./www/src
+        cp -r ./docs ./www/docs
     # Create a fresh git repo in www
     - name: Init new repo in www and commit generated files
       run: |

@@ -5,6 +5,10 @@
 - [Running tests](#running-tests)
 - [Reading jsdoc docs](#reading-jsdoc-docs)
 
+## Live demo
+
+You can enter the live demo ![here](https://faaa97.github.io/mandelbrot-set-visualization/)
+
 ## Directory Structure
 
 This directory is organised as follows:
