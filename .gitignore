@@ -1,3 +1,8 @@
+#Deploy
+
+www/src
+www/docs
+
 # Logs
 logs
 *.log

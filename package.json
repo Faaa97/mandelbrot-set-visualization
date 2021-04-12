@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "start": "node web-server/app.js",
+    "start": "cp -r ./src ./www/src/ && cp -r ./docs ./www/docs && node web-server/app.js",
     "test": "./node_modules/.bin/mocha -r esm --recursive test/",
     "jsdoc": "jsdoc src/ -r src/*.md -r -d docs"
   },
