@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: mandelbrot-area.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: mandelbrot-area.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @author Felipe Andrés Alvarez Avaria &lt;faaa97@protonmail.com>
+ * @file Module that exports a function that calculates area in mandelbrot
+ * set via calculating a random number of complex numbers
+ */
+
+'use_strict';
+
+import Mandelbrot from '../../src/mandelbrot.js';
+import Complex from '../../src/complex.js';
+
+/**
+ * Returns a random number between min and max (min included, max excluded)
+ *
+ * @param {number} min min limit (included)
+ * @param {number} max max limit (excluded)
+ * @returns {number} random number
+ */
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+/**
+ * Retuns a random complex number that falls between
+ * [lowReal, highReal) for real part and [lowImaginary, highImaginary)
+ * for imaginary part
+ *
+ * @param {number} lowReal low range for real part (included)
+ * @param {number} highReal high range for real part (excluded)
+ * @param {number} lowImaginary low range for imaginary part (included)
+ * @param {number} highImaginary high range for imaginary part (excluded)
+ * @returns {Complex} Random complex between range
+ */
+function generateRandomComplexPoint(
+    lowReal, highReal, lowImaginary, highImaginary) {
+  const real = getRandomArbitrary(lowReal, highReal);
+  const imaginary = getRandomArbitrary(lowImaginary, highImaginary);
+  return new Complex(real, imaginary);
+}
+
+/**
+ * Retuns a list (array) of random numbers suited for mandelbrot
+ * area calculation
+ *
+ * @param {number} points how many points to generate
+ * @returns {Array&lt;Complex>} Array of random complex numbers
+ * @see generateRandomComplexPoint this is used for generation
+ */
+function generateRandomComplexPoints(points) {
+  const REAL_LIMITS = {
+    low: -2.0,
+    high: 0.5,
+  };
+  const IMAGINARY_LIMITS = {
+    low: 0.5,
+    high: 1.125,
+  };
+
+  const result = [];
+  for (let i = 0; i &lt; points; i++) {
+    const complex = generateRandomComplexPoint(
+        REAL_LIMITS.low,
+        REAL_LIMITS.high,
+        IMAGINARY_LIMITS.low,
+        IMAGINARY_LIMITS.high);
+
+    result.push(complex);
+  }
+  return result;
+}
+
+/**
+ * Test every point in argument if converges or not while applying
+ * Mandelbrot iterative function. Returns how many points converges.
+ *
+ * @param {Array&lt;Complex>} points random complex points to be tested
+ * @param {number} iterLimit how many iterations to consider a point
+ * it converges in case it not diverges first
+ * @returns {number} number of random complex points that converges
+ */
+function getNumberOfPointsInsideMandelbrotArea(points, iterLimit) {
+  let insidePoints = 0;
+
+  const mandelbrot = new Mandelbrot(iterLimit);
+
+  points.forEach((complexPoint) => {
+    const result = mandelbrot.iterate(complexPoint);
+    if (result.converges === true) {
+      insidePoints++;
+    }
+  });
+
+  return insidePoints;
+}
+
+/**
+ * Calculates area and error from mandelbrot set, given
+ * many random complex points.
+ *
+ * @module calculateArea
+ * @returns {object&lt;number,number>} JS object with area and error properties
+ */
+function calculateArea() {
+  const question = 'How many points to generate to calculate area?\n' +
+      '1000+ points recommended, however it can take some time';
+  const totalPoints = parseInt(prompt(question));
+  const iterLimit = 10000;
+
+  const complexPointsToTest = generateRandomComplexPoints(totalPoints);
+  const insidePoints =
+      getNumberOfPointsInsideMandelbrotArea(complexPointsToTest, iterLimit);
+
+  // Calculate area and error
+  const area = 2 * 2.5 * 1.125 * insidePoints / totalPoints;
+  const error = area / Math.sqrt(totalPoints);
+  return {area: area, error: error};
+}
+
+export default {calculateArea};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-calculateArea.html">calculateArea</a></li><li><a href="module-loadVisualization.html">loadVisualization</a></li></ul><h3>Classes</h3><ul><li><a href="Complex.html">Complex</a></li><li><a href="Complex.module.exports.html">module.exports</a></li><li><a href="Mandelbrot.html">Mandelbrot</a></li><li><a href="Mandelbrot.module.exports.html">module.exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#assignHSVColor">assignHSVColor</a></li><li><a href="global.html#computeForCanvas">computeForCanvas</a></li><li><a href="global.html#drawArea">drawArea</a></li><li><a href="global.html#drawError">drawError</a></li><li><a href="global.html#drawMandelbrotSet">drawMandelbrotSet</a></li><li><a href="global.html#drawPanel">drawPanel</a></li><li><a href="global.html#drawPixelIntoImageData">drawPixelIntoImageData</a></li><li><a href="global.html#drawWhiteOnBlackText">drawWhiteOnBlackText</a></li><li><a href="global.html#generateRandomComplexPoint">generateRandomComplexPoint</a></li><li><a href="global.html#generateRandomComplexPoints">generateRandomComplexPoints</a></li><li><a href="global.html#getNumberOfPointsInsideMandelbrotArea">getNumberOfPointsInsideMandelbrotArea</a></li><li><a href="global.html#getRandomArbitrary">getRandomArbitrary</a></li><li><a href="global.html#hsvToRgb">hsvToRgb</a></li><li><a href="global.html#pointToComplex">pointToComplex</a></li><li><a href="global.html#resizeCanvas">resizeCanvas</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Apr 12 2021 18:13:35 GMT+0100 (Western European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

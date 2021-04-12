@@ -1,0 +1,49 @@
+{
+    "env": {
+      "browser": true,
+      "es6": true,
+      "es2020":true,
+      "node": true,
+      "mocha": true
+    },
+    "extends": [
+      "google",
+      "plugin:jsdoc/recommended"
+    ],
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "jsdoc"
+    ],
+    "rules": {
+      "no-unused-vars" : "warn",
+      "space-infix-ops": "warn",
+      "valid-jsdoc": "off",
+      "jsdoc/require-jsdoc": ["error", {
+          "require": {
+              "ClassDeclaration": true,
+              "FunctionDeclaration": true,
+              "MethodDefinition": true
+          }
+      }],
+      "no-use-before-define": ["error", { 
+          "functions": true, 
+          "classes": true,
+          "variables": true 
+      }],
+      "prefer-const": ["warn", {
+          "ignoreReadBeforeAssign": true  
+      }],
+      "max-len": ["error", { 
+          "ignorePattern": "^\\s*const\\s.+=\\s*require\\s*\\(",
+          "ignoreUrls": true
+      }]
+    }
+}
