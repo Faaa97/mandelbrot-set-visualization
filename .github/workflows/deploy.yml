@@ -8,7 +8,17 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - run: npm install
+    - run: npm test
+
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -18,22 +28,28 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Copy extra files to the www folder
-    - run: |
-        cp ./README.md ./www/README.md
-        cp ./LICENSE ./www/LICENSE
-        cp -r ./src ./www/src
-        cp -r ./docs ./www/docs
-    # Create a fresh git repo in www
-    - name: Init new repo in www and commit generated files
+    - name: Build javascript files
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
       run: |
-        cd www
+        npm install
+        npm run build
+    # Copy extra files to the dist folder
+    - run: |
+        cp ./README.md ./dist/README.md
+        cp ./LICENSE ./dist/LICENSE
+        cp -r ./docs ./dist/docs
+    # Create a fresh git repo in dist
+    - name: Init new repo in dist and commit generated files
+      run: |
+        cd dist
         git init
         git add -A
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -m 'deploy'
-    # force push the contents of the wwwroot folder to the gh-pages branch
+    # force push the contents of the dist root folder to the gh-pages branch
     - name: Force push to master
       uses: ad-m/github-push-action@v0.5.0
       with:
@@ -46,4 +62,4 @@ jobs:
         # Determines if force push is used
         force: true
         # Directory to change to before pushing.
-        directory: ./www
+        directory: ./dist

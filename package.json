@@ -7,35 +7,39 @@
     "test": "test"
   },
   "scripts": {
-    "start": "cp -r ./src ./www/src/ && cp -r ./docs ./www/docs && node web-server/app.js",
+    "start": "node web-server/app.js",
+    "build": "./node_modules/.bin/webpack --config webpack.config.js",
     "test": "./node_modules/.bin/mocha -r esm --recursive test/",
     "jsdoc": "jsdoc src/ -r src/*.md -r -d docs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ULL-ESIT-INF-PAI-2019-2020/practica-07-mandelbrot-alu0100969535.git"
+  "dependencies": {
+    "express": "^4.17.1",
+    "path": "^0.12.7"
   },
-  "keywords": [
-    "mandelbrot"
-  ],
-  "author": "Felipe Andrés Álvarez Avaria",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ULL-ESIT-INF-PAI-2019-2020/practica-07-mandelbrot-alu0100969535/issues"
-  },
-  "homepage": "https://github.com/ULL-ESIT-INF-PAI-2019-2020/practica-07-mandelbrot-alu0100969535#readme",
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
+    "esbuild-loader": "^2.11.1",
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-jsdoc": "^22.1.0",
     "esm": "^3.2.25",
     "jsdoc": "^3.6.3",
-    "mocha": "^7.1.1"
+    "mocha": "^7.1.1",
+    "webpack": "^5.33.2",
+    "webpack-cli": "^4.6.0"
   },
-  "dependencies": {
-    "express": "^4.17.1",
-    "path": "^0.12.7"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Faaa97/mandelbrot-set-visualization.git"
+  },
+  "keywords": [
+    "mandelbrot"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Faaa97/mandelbrot-set-visualization/issues"
+  },
+  "homepage": "https://github.com/Faaa97/mandelbrot-set-visualization#readme"
 }

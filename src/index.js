@@ -5,7 +5,7 @@
 
 'use_strict';
 
-import loadVisualization from '../src/mandelbrot-visualization.js';
+import loadVisualization from './mandelbrot-visualization.js';
 
 window.addEventListener('load', () => {
   const canvas = document.getElementById('canvas');

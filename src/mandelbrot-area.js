@@ -6,8 +6,8 @@
 
 'use_strict';
 
-import Mandelbrot from '../../src/mandelbrot.js';
-import Complex from '../../src/complex.js';
+import Mandelbrot from './mandelbrot.js';
+import Complex from './complex.js';
 
 /**
  * Returns a random number between min and max (min included, max excluded)
