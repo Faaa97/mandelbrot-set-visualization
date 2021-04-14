@@ -1,0 +1,39 @@
+h1 {
+  text-align: center;
+}
+
+#header-wrapper {
+  text-align: left;
+}
+
+#header {
+  display: inline-block;
+  font-size: large;
+}
+
+#header > div {
+  text-align: left;
+}
+
+#alumno{
+  font-size: medium;
+}
+
+#links {
+  text-align: center;
+  background-color: #c2c2c2;
+}
+
+#canvas-container {
+  width: 100%;
+  text-align:center;
+}
+
+#canvas {
+  display: inline;
+  outline: black 3px solid;
+}
+
+#separator {
+  height: 1rem;
+}

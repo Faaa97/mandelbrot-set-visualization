@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: complex.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: complex.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @author Felipe Andrés Alvarez Avaria &lt;faaa97@protonmail.com>
+ * @file Module that exports a class which handles complex numbers
+ * @tutorial https://en.wikipedia.org/wiki/Complex_number
+ */
+
+'use strict';
+
+/**
+ * Class which represent a complex number and provides some
+ * methods to operate with it.
+ *
+ * @module Complex
+ * @class Complex
+ */
+export default class Complex {
+  #real;
+  #imaginary;
+  /**
+   * Creates an instance of a Complex number.
+   *
+   * @param {number} real real part of a complex number
+   * @param {number} imaginary imaginary part of a complex number
+   * @memberof Complex
+   */
+  constructor(real, imaginary) {
+    this.#real = real;
+    this.#imaginary = imaginary;
+  };
+
+  /**
+   * Real part getter
+   *
+   * @readonly
+   * @returns {number} real part of complex number
+   * @memberof Complex
+   */
+  get real() {
+    return this.#real;
+  };
+
+  /**
+   * Imaginary part getter
+   *
+   * @readonly
+   * @returns {number} imaginary part of complex number
+   * @memberof Complex
+   */
+  get imaginary() {
+    return this.#imaginary;
+  };
+
+  /**
+   * Sums two Complex numbers and returns its result.
+   * Left operand is this.
+   *
+   * @param {Complex} right Right operand of sum
+   * @returns {Complex} Result of this + right
+   * @memberof Complex
+   */
+  sum(right) {
+    const realResult = this.real + right.real;
+    const imaginaryResult = this.imaginary + right.imaginary;
+
+    return new Complex(realResult, imaginaryResult);
+  };
+
+  /**
+   * Substracts two Complex numbers and returns its result.
+   * Left operand is this.
+   *
+   * @param {Complex} right Right operand of substraction
+   * @returns {Complex} Result of this - right
+   * @memberof Complex
+   */
+  substraction(right) {
+    const realResult = this.real - right.real;
+    const imaginaryResult = this.imaginary - right.imaginary;
+
+    return new Complex(realResult, imaginaryResult);
+  };
+
+  /**
+   * Multiplies two Complex numbers and returns its result.
+   * Left operand is this.
+   *
+   * @param {Complex} right Right operand of multiplication
+   * @returns {Complex} Result of this - right
+   * @memberof Complex
+   */
+  multiplication(right) {
+    const realResult = this.real * right.real -
+        this.imaginary * right.imaginary;
+    const imaginaryResult = this.real * right.imaginary +
+        this.imaginary * right.real;
+
+    return new Complex(realResult, imaginaryResult);
+  };
+
+  /**
+   * Returns 'complex' to the power of 'exponent'.
+   * 'this' is the base in this operation
+   * Internally uses multiplication 'exponent' times.
+   *
+   * @param {number} exponent Number to be used as exponent.
+   * @returns {Complex} Result of this^exponent
+   * @memberof Complex
+   */
+  power(exponent) {
+    const base = this;
+    let result = base;
+
+    for (let i = 0; i &lt; exponent - 1; i++) {
+      result = result.multiplication(base);
+    }
+
+    return result;
+  };
+
+  /**
+   * Calculates modulus of this Complex number and
+   * returns it
+   *
+   * @returns {number} modulus of this Complex number
+   * @memberof Complex
+   */
+  modulus() {
+    const termA = this.real * this.real; // this.real^2
+    const termB = this.imaginary * this.imaginary; // this.imaginary^2
+    return Math.sqrt(termA + termB);
+  };
+
+  /**
+   * Returns a new object with the same attributes as this
+   *
+   * @returns {Complex} New object of class Complex
+   * @memberof Complex
+   */
+  clone() {
+    const real = this.real;
+    const imaginary = this.imaginary;
+    return new Complex(real, imaginary);
+  }
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-calculateArea.html">calculateArea</a></li><li><a href="module-loadVisualization.html">loadVisualization</a></li></ul><h3>Classes</h3><ul><li><a href="Complex.html">Complex</a></li><li><a href="Complex.module.exports.html">module.exports</a></li><li><a href="Mandelbrot.html">Mandelbrot</a></li><li><a href="Mandelbrot.module.exports.html">module.exports</a></li></ul><h3>Global</h3><ul><li><a href="global.html#assignHSVColor">assignHSVColor</a></li><li><a href="global.html#computeForCanvas">computeForCanvas</a></li><li><a href="global.html#drawArea">drawArea</a></li><li><a href="global.html#drawError">drawError</a></li><li><a href="global.html#drawMandelbrotSet">drawMandelbrotSet</a></li><li><a href="global.html#drawPanel">drawPanel</a></li><li><a href="global.html#drawPixelIntoImageData">drawPixelIntoImageData</a></li><li><a href="global.html#drawWhiteOnBlackText">drawWhiteOnBlackText</a></li><li><a href="global.html#generateRandomComplexPoint">generateRandomComplexPoint</a></li><li><a href="global.html#generateRandomComplexPoints">generateRandomComplexPoints</a></li><li><a href="global.html#getNumberOfPointsInsideMandelbrotArea">getNumberOfPointsInsideMandelbrotArea</a></li><li><a href="global.html#getRandomArbitrary">getRandomArbitrary</a></li><li><a href="global.html#hsvToRgb">hsvToRgb</a></li><li><a href="global.html#pointToComplex">pointToComplex</a></li><li><a href="global.html#resizeCanvas">resizeCanvas</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Apr 12 2021 18:13:35 GMT+0100 (Western European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
